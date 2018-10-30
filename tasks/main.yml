@@ -14,6 +14,18 @@
     key: "/org/gnome/shell/enabled-extensions"
     value: "['alternate-tab@gnome-shell-extensions.gcampax.github.com']"
 
+- name: Disable Native Scroll for Mouse
+  become: false
+  dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/natural-scroll"
+    value: "false"
+
+- name: Disable Native Scroll for Touchpad
+  become: false
+  dconf:
+    key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
+    value: "false"
+
 - name: Show date in menubar
   become: false
   dconf:
