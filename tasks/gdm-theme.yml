@@ -1,0 +1,17 @@
+---
+- name: Copy GDM background
+  become: true
+  copy:
+    src: files/black_woven_seamless_tile.jpg
+    dest: /usr/share/backgrounds/black_woven_seamless_tile.jpg
+    mode: 0644
+  when: gnome_desktop_gdm_theme
+
+- name: Configure GDM
+  become: true
+  replace:
+    path: /etc/alternatives/gdm3.css
+    regexp: '#lockDialogGroup {(\s*?.*?)*?\}'
+    replace: '#lockDialogGroup {\n  background: #000000 url(file:///usr/share/backgrounds/black_woven_seamless_tile.jpg);\n  background-repeat: repeat;\n  background-size: auto; }'
+  when: gnome_desktop_gdm_theme
+

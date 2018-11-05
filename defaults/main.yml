@@ -1,0 +1,7 @@
+---
+gnome_desktop_autohide_panel: true
+gnome_desktop_classic_alttab: true
+gnome_desktop_disable_native_scroll: true
+gnome_desktop_gdm_theme: true
+gnome_desktop_menubar_date: true
+

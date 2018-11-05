@@ -1,53 +1,7 @@
 ---
-- name: Install Gnome customisation packages
-  become: true
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - gnome-shell-extensions
-    - gnome-tweaks
+- include: classic-alt-tab.yml
+- include: disable-native-scroll.yml
+- include: menubar-date.yml
+- include: autohide-panel.yml
+- include: gdm-theme.yml
 
-- name: Enable alternate-tab
-  become: false
-  dconf:
-    key: "/org/gnome/shell/enabled-extensions"
-    value: "['alternate-tab@gnome-shell-extensions.gcampax.github.com']"
-
-- name: Disable Native Scroll for Mouse
-  become: false
-  dconf:
-    key: "/org/gnome/desktop/peripherals/mouse/natural-scroll"
-    value: "false"
-
-- name: Disable Native Scroll for Touchpad
-  become: false
-  dconf:
-    key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
-    value: "false"
-
-- name: Show date in menubar
-  become: false
-  dconf:
-    key: "/org/gnome/desktop/interface/clock-show-date"
-    value: "true"
-
-- name: Auto-hide panel
-  become: false
-  dconf:
-    key: "/org/gnome/shell/extensions/dash-to-dock/dock-fixed"
-    value: "false"
-
-- name: Copy GDM background
-  become: true
-  copy:
-    src: files/black_woven_seamless_tile.jpg
-    dest: /usr/share/backgrounds/black_woven_seamless_tile.jpg
-    mode: 0644
-
-- name: Configure GDM
-  become: true
-  replace:
-    path: /etc/alternatives/gdm3.css
-    regexp: '#lockDialogGroup {(\s*?.*?)*?\}'
-    replace: '#lockDialogGroup {\n  background: #000000 url(file:///usr/share/backgrounds/black_woven_seamless_tile.jpg);\n  background-repeat: repeat;\n  background-size: auto; }'

@@ -1,0 +1,8 @@
+---
+- name: Show date in menubar
+  become: false
+  dconf:
+    key: "/org/gnome/desktop/interface/clock-show-date"
+    value: "true"
+  when: gnome_desktop_menubar_date
+
