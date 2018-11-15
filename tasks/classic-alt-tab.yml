@@ -2,11 +2,10 @@
 - name: Install Gnome customisation packages
   become: true
   apt:
-    name: "{{ item }}"
+    pkg:
+      - gnome-shell-extensions
+      - gnome-tweaks
     state: present
-  with_items:
-    - gnome-shell-extensions
-    - gnome-tweaks
   when: gnome_desktop_classic_alttab
 
 - name: Enable alternate-tab
